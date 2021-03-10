@@ -3,6 +3,7 @@ project(qwt)
 
 option(BUILD_EXAMPLES "Build examples. Takes considerably more time to build." ON)
 option(BUILD_PLAYGROUND "Build playground examples. Takes considerably more time to build." ON)
+option(BUILD_DESIGNER "Build designer." OFF)
 option(BUILD_TESTS "Build tests." ON)
 
 set(CMAKE_AUTOMOC ON)
@@ -58,6 +59,10 @@ endif()
 
 if(BUILD_PLAYGROUND)
 	add_subdirectory(playground)
+endif()
+
+if(BUILD_DESIGNER)
+	add_subdirectory(designer)
 endif()
 
 if(BUILD_TESTS)
