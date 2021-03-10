@@ -39,8 +39,7 @@ add_library(qwt::qwt ALIAS qwt)
 set_target_properties(qwt PROPERTIES
 	VERSION 6.1.6
 	#SOVERSION 6
-	#PUBLIC_HEADER "${QWT_HEADERS};${QWT_CLASS_INCLUDES}"
-	PUBLIC_HEADER "${QWT_CLASS_INCLUDES}"		#This is what cmake --install will put in include/
+	PUBLIC_HEADER "${QWT_HEADERS};${QWT_CLASS_INCLUDES}"		#This is what cmake --install will put in include/
 )
 
 target_include_directories(qwt PUBLIC 			# This is what targets that link against qwt will see
