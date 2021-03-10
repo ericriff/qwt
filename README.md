@@ -1,7 +1,9 @@
-# Notice
+Notice
+----------------------
 This is a fork of https://sourceforge.net/projects/qwt/ which aims to add CMake support
 
-## Build, test & Install
+Build, test & Install
+----------------------
 ```bash
 mkdir build
 cd build
@@ -24,7 +26,7 @@ The Qwt Widget Library
 
       Qwt is hosted at http://qwt.sf.net
 
-Installation
+Installation (Without CMake)
 ------------
       
       Read INSTALL how to build and install Qwt.
