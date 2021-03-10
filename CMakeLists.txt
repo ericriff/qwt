@@ -1,12 +1,12 @@
 cmake_minimum_required(VERSION 3.15)
 project(qwt)
 
-option(BUILD_EXAMPLES "Build examples. Takes considerably more time to build." ON)
-option(BUILD_PLAYGROUND "Build playground examples. Takes considerably more time to build." ON)
+option(BUILD_EXAMPLES "Build examples. Takes considerably more time to build." OFF)
+option(BUILD_PLAYGROUND "Build playground examples. Takes considerably more time to build." OFF)
 option(BUILD_DESIGNER "Build designer." OFF)
-option(BUILD_TESTS "Build tests." ON)
+option(BUILD_TESTS "Build tests." OFF)
 
-set(CMAKE_AUTOMOC ON)
+#set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
@@ -28,8 +28,11 @@ file(GLOB QWT_SOURCES src/*.cpp)
 file(GLOB QWT_HEADERS src/*.h)
 file(GLOB QWT_CLASS_INCLUDES classincludes/*)
 list(REMOVE_ITEM QWT_CLASS_INCLUDES ${CMAKE_SOURCE_DIR}/classincludes/classincludes.pro )
+list(REMOVE_ITEM QWT_HEADERS ${CMAKE_SOURCE_DIR}/src/qwt_widget_overlay.h )
 
-add_library(qwt ${QWT_SOURCES} ${QWT_HEADERS})
+qt5_wrap_cpp(QWT_MOCS ${QWT_HEADERS})
+
+add_library(qwt ${QWT_SOURCES} ${QWT_HEADERS} ${QWT_MOCS})
 add_library(qwt::qwt ALIAS qwt)
 
 set_target_properties(qwt PROPERTIES
@@ -40,6 +43,7 @@ set_target_properties(qwt PROPERTIES
 
 target_include_directories(qwt PUBLIC 			# This is what targets that link against qwt will see
 	$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
+	$<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/src>	# mocs are here if we're using qt5_wrap_cpp() instead of automoc
 	$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/classincludes>
 )
 
