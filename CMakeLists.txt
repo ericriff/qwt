@@ -6,6 +6,7 @@ option(BUILD_PLAYGROUND "Build playground examples. Takes considerably more time
 option(BUILD_TESTS "Build tests." ON)
 
 set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 # Without this define moc files are not included and linking of examples fails.
