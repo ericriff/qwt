@@ -3,7 +3,7 @@ project(qwt)
 
 option(BUILD_EXAMPLES "Build examples. Takes considerably more time to build." ON)
 option(BUILD_PLAYGROUND "Build playground examples. Takes considerably more time to build." ON)
-option(BUILD_TESTS "Build tests." OFF)
+option(BUILD_TESTS "Build tests." ON)
 
 #list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake)
 
