@@ -5,16 +5,10 @@ option(BUILD_EXAMPLES "Build examples. Takes considerably more time to build." O
 option(BUILD_PLAYGROUND "Build playground examples. Takes considerably more time to build." ON)
 option(BUILD_TESTS "Build tests." ON)
 
-#list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake)
-
-set(CMAKE_VERBOSE_MAKEFILE OFF)
-
 set(CMAKE_AUTOMOC ON)
-#set(CMAKE_AUTOUIC ON) # ???
-#set(CMAKE_AUTORCC ON) # ???
-#set(CMAKE_INCLUDE_CURRENT_DIR ON) # ???
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
-# Whithout this define moc files are not included and linking of examples fails.
+# Without this define moc files are not included and linking of examples fails.
 add_definitions(-DQWT_MOC_INCLUDE)
 
 find_package(Qt5 REQUIRED
@@ -29,8 +23,8 @@ find_package(Qt5 REQUIRED
 )
 
 file(GLOB QWT_SOURCES src/*.cpp)
-file(GLOB QWT_HEADERS src/*.h) #Private headers?
-file(GLOB QWT_CLASS_INCLUDES classincludes/*) #Public headers?
+file(GLOB QWT_HEADERS src/*.h)
+file(GLOB QWT_CLASS_INCLUDES classincludes/*)
 list(REMOVE_ITEM QWT_CLASS_INCLUDES ${CMAKE_SOURCE_DIR}/classincludes/classincludes.pro )
 
 add_library(qwt ${QWT_SOURCES} ${QWT_HEADERS})
@@ -47,16 +41,15 @@ target_include_directories(qwt PUBLIC 			# This is what targets that link agains
 	$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/classincludes>
 )
 
-target_link_libraries(qwt
-						Qt5::Core
-						Qt5::Gui
-						Qt5::Widgets
-						Qt5::OpenGL
-						Qt5::Concurrent
-						Qt5::PrintSupport
-						Qt5::Svg
+target_link_libraries(qwt PUBLIC
+							Qt5::Core
+							Qt5::Gui
+							Qt5::Widgets
+							Qt5::OpenGL
+							Qt5::Concurrent
+							Qt5::PrintSupport
+							Qt5::Svg
 )
-
 
 if(BUILD_EXAMPLES)
 	add_subdirectory(examples)
@@ -71,8 +64,7 @@ if(BUILD_TESTS)
 	add_subdirectory(tests)
 endif()
 
-install(TARGETS
-	qwt
+install(TARGETS	qwt
 	ARCHIVE DESTINATION lib
 	LIBRARY DESTINATION lib
 	RUNTIME DESTINATION bin
