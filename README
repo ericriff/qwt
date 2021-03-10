@@ -1,3 +1,16 @@
+# Notice
+This is a fork of https://sourceforge.net/projects/qwt/ which aims to add CMake support
+
+## Build, test & Install
+```bash
+mkdir build
+cd build
+cmake ..
+cmake --build . -jx (e.g. -j8)
+ctest . --verbose
+cmake --install .
+```
+
 
 The Qwt Widget Library
 ----------------------
